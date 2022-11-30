@@ -13,6 +13,8 @@ use App\Http\Controllers\RecaptchaMathController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\SeoController;
 use App\Http\Controllers\VertaController;
+use App\Http\Controllers\PdfController;
+use App\Http\Controllers\AgentController;
 
 
 /*
@@ -30,33 +32,33 @@ Route::get('/', function () {
     return view('welcome');
 })->middleware('verified');
 
-// Socialite package(oauth authentication)
+//Socialite package(oauth authentication)
 Route::get('google/redirect', [GoogleController::class, 'redirect'])->name('google.redirect');
 Route::get('google/callback', [GoogleController::class, 'callback'])->name('google.callback');
 Route::view('google', 'oauth.google');
 
-// Intervention image package
+//Intervention image package
 Route::get('image', [ImageController::class, 'index'])->name('image.index');
 Route::post('image', [ImageController::class, 'imageStore'])->name('image.store');
 
-// Role & Permissions package
+//Role & Permissions package
 Route::get('roles', [RoleController::class, 'index'])->name('roles.index');
 Route::get('roles/create', [RoleController::class, 'create'])->name('roles.create');
 Route::post('roles', [RoleController::class, 'store'])->name('roles.store');
 Route::get('roles/give', [RoleController::class, 'giveRole'])->name('roles.give');
 
-// Excel package
+//Excel package
 Route::get('excel/export', [ExcelController::class, 'export'])->name('excel.export');
 Route::get('excel/import', [ExcelController::class, 'import'])->name('excel.import');
 
-// Google recaptcha package
+//Google recaptcha package
 Route::get('google/recaptcha-google', [RecaptchaController::class, 'recaptcha'])->name('recaptcha.recaptcha');
 
-// Recaptcha math package
+//Recaptcha math package
 Route::get('recaptcha-math/recaptcha', [RecaptchaMathController::class, 'math'])->name('recaptcha-math.recaptcha');
 Route::get('recaptcha-math/recaptcha/refresh', [RecaptchaMathController::class, 'refresh'])->name('recaptcha-math.refresh');
 
-// Data & Time package(verta & morilogJalali)
+//Data & Time package(verta & morilogJalali)
 Route::group(['prefix' => 'date'], function () {
     Route::get('verta', [VertaController::class, 'view'])->name('date.verta');
     Route::get('morilog', [MorilogJalaliController::class, 'view'])->name('date.morlog');
@@ -65,7 +67,14 @@ Route::group(['prefix' => 'date'], function () {
 //Laravel seo package
 Route::get('seo', [SeoController::class, 'index'])->name('seo.index');
 
-// Laravel ui package
+//Laravel ui package
 Auth::routes(['verify' => true]);
 Auth::routes(['verify' => true]);
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+//laravel dompdf package
+Route::get('pdf', [PdfController::class, 'index'])->name('pdf.index');
+Route::get('pdf/export', [PdfController::class, 'export'])->name('pdf.export');
+
+//Laravel agent package(شناسایی پلت فرم)
+Route::get('agent', [AgentController::class, 'index'])->name('agent.index');

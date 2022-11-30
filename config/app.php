@@ -172,6 +172,7 @@ return [
         Maatwebsite\Excel\ExcelServiceProvider::class,
         Mews\Captcha\CaptchaServiceProvider::class,
         Hekmatinasser\Verta\Laravel\VertaServiceProvider::class,
+        Jenssegers\Agent\AgentServiceProvider::class,
         /*
          * Application Service Providers...
          */
@@ -240,7 +241,8 @@ return [
         'Excel' => Maatwebsite\Excel\Facades\Excel::class,
         'Captcha' => Mews\Captcha\Facades\Captcha::class,
         'Verta' => Hekmatinasser\Verta\Verta::class,
-        'SEO' => Artesaos\SEOTools\Facades\SEOTools::class
+        'SEO' => Artesaos\SEOTools\Facades\SEOTools::class,
+        'Agent' => Jenssegers\Agent\Facades\Agent::class,
     ],
 
 ];
